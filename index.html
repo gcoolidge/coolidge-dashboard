@@ -201,7 +201,7 @@
       <span class="sub">What's working, when to post, and what to fix — across your channels</span>
     </div>
     <span class="spacer"></span>
-    <span class="pill" id="statusPill"><span class="dot"></span><span>Sample data</span></span>
+    <span class="pill live" id="statusPill"><span class="dot"></span><span>Baseline · Jul 17, 2026</span></span>
     <div class="ctrl">
       <select id="period" aria-label="Time period">
         <option>Last 7 days</option>
@@ -220,12 +220,40 @@
   </div>
 
   <div class="banner">
-    <span class="ic">🔌</span>
+    <span class="ic">✅</span>
     <div>
-      <b>You're viewing sample data.</b> The layout, metrics, and recommendations are live — they just need your real numbers flowing in.
-      <p>Tracking three channels: the <b>Coolidge Group</b> Instagram (business), your <b>personal Creator</b> Instagram, and your <b>Facebook Page</b>. Connect them once via Metricool and each tab fills with real performance. See the <a href="#howto">setup steps ↓</a> at the bottom.</p>
+      <b>Metricool is connected — baseline captured Jul 17, 2026.</b> Real numbers are recorded in the snapshot below.
+      <p>Metricool only collects from the day you connect, so the tab charts below still show <b>illustrative sample data</b> for now. Real numbers fill in over the next ~2 weeks, and the next full pull (~Jul 31) will show true growth against today's baseline. Personal accounts stay as manual-update tabs. See <a href="#howto">setup notes ↓</a>.</p>
     </div>
   </div>
+
+  <!-- Baseline snapshot -->
+  <section class="card" style="border-left:4px solid var(--good);margin-bottom:20px">
+    <h3>📌 Baseline snapshot — captured Jul 17, 2026 (from Metricool)</h3>
+    <p class="cap">The real anchor we'll measure growth against at the next update. Blank metrics are still collecting or need your input.</p>
+    <div class="mon-grid">
+      <div class="mon-card">
+        <div class="mh"><span class="who">Coolidge Group · Facebook Page</span><span class="prog" style="color:var(--good)">● real</span></div>
+        <div class="pgm">KW Advisors — last 30 days (Metricool free = 30-day window)</div>
+        <div class="crit"><span class="ci">👥</span><span class="cn"><b>Followers</b></span><span class="cv">113</span></div>
+        <div class="crit"><span class="ci">👁️</span><span class="cn"><b>Views</b><span class="sub">last 30 days</span></span><span class="cv">123</span></div>
+        <div class="crit"><span class="ci">🚪</span><span class="cn"><b>Page visits</b><span class="sub">last 30 days</span></span><span class="cv">105</span></div>
+        <div class="crit"><span class="ci">📝</span><span class="cn"><b>Posts published</b><span class="sub">last 30 days</span></span><span class="cv">1</span></div>
+      </div>
+      <div class="mon-card">
+        <div class="mh"><span class="who">Coolidge Group · Instagram</span><span class="prog" style="color:var(--warning)">● collecting</span></div>
+        <div class="pgm">@thecoolidgegroup — connected today</div>
+        <div class="crit"><span class="ci">⏳</span><span class="cn"><b>No data yet</b><span class="sub">Metricool starts from the connection day; Instagram history can't be backfilled</span></span><span class="cv">—</span></div>
+        <div class="mon-next" style="margin-top:11px">👉 Real Instagram numbers appear at the next pull (~Jul 31). Send me today's current follower count and I'll anchor it now.</div>
+      </div>
+      <div class="mon-card">
+        <div class="mh"><span class="who">Personal accounts</span><span class="prog" style="color:var(--accent)">● manual</span></div>
+        <div class="pgm">Greg personal IG + personal FB (Professional Mode)</div>
+        <div class="crit"><span class="ci">✍️</span><span class="cn"><b>Manual-update tabs</b><span class="sub">Not on Metricool's free plan (business brand only)</span></span><span class="cv">—</span></div>
+        <div class="mon-next" style="margin-top:11px">👉 Send me the current follower counts from each app and I'll set today's baseline for these too.</div>
+      </div>
+    </div>
+  </section>
 
   <!-- KPIs -->
   <div class="grid kpis" id="kpiRow"></div>
