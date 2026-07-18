@@ -149,6 +149,24 @@
   .mon-next b{font-weight:700}
   @media(max-width:900px){.mon-grid{grid-template-columns:1fr}}
 
+  /* strategy room */
+  .northstar{background:var(--accent-soft);border-radius:11px;padding:13px 15px;margin-bottom:16px}
+  .northstar .lbl{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.05em;text-transform:uppercase}
+  .northstar .txt{font-size:15px;font-weight:600;margin-top:3px;line-height:1.4}
+  .goal{display:grid;grid-template-columns:158px 1fr 96px;align-items:center;gap:11px;margin:8px 0;font-size:13px}
+  .goal .gname{font-weight:600}
+  .goal .gname .sub{display:block;color:var(--muted);font-size:11px;font-weight:500}
+  .goal .gbar{height:16px;background:var(--grid);border-radius:6px;overflow:hidden}
+  .goal .gfill{height:100%;border-radius:6px}
+  .goal .gnum{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:12.5px}
+  .move{display:grid;grid-template-columns:22px 1fr;gap:9px;padding:9px 0;border-top:1px solid var(--grid);font-size:13px}
+  .move:first-of-type{border-top:none}
+  .move .pr{font-size:15px;line-height:1.2}
+  .move b{font-weight:700}
+  .move .why{display:block;color:var(--text-secondary);font-size:12.2px;margin-top:2px}
+  .preview-note{display:flex;align-items:center;gap:9px;background:var(--card);border:1px dashed var(--baseline);border-radius:10px;padding:9px 13px;margin-bottom:12px;font-size:12.8px;color:var(--text-secondary)}
+  @media(max-width:900px){.goal{grid-template-columns:118px 1fr 82px}}
+
   .tt{position:fixed;pointer-events:none;background:var(--text-primary);color:var(--page);
     font-size:12px;padding:6px 9px;border-radius:7px;opacity:0;transform:translateY(4px);
     transition:opacity .12s;z-index:50;white-space:nowrap;font-weight:600;}
@@ -257,7 +275,76 @@
     </div>
   </section>
 
+  <!-- CMO Strategy Room -->
+  <section style="margin-bottom:20px">
+    <div class="card" style="border-left:4px solid var(--accent);margin-bottom:16px">
+      <h3>🎯 Strategy Room</h3>
+      <p class="cap">The proactive layer — turns the numbers into goals, focus, and weekly action. Reviewed like an outside CMO would.</p>
+
+      <div class="northstar">
+        <div class="lbl">North Star</div>
+        <div class="txt">Make The Coolidge Group the most-recognized local real-estate brand across Greater Cincinnati, NKY &amp; SE Indiana — powered by Greg's personal brand feeding the business accounts and, ultimately, listings &amp; referrals.</div>
+      </div>
+
+      <h4 style="margin:10px 0 2px;font-size:13.5px">90-day follower goals</h4>
+      <p class="cap" style="margin-bottom:11px">Set against the Jul 17 baseline. Bars = current vs. target.</p>
+      <div class="goal"><div class="gname">Personal FB <span class="sub">Greg Coolidge</span></div><div class="gbar"><div class="gfill" style="width:82%;background:var(--good)"></div></div><div class="gnum">4,100 / 5,000</div></div>
+      <div class="goal"><div class="gname">Personal IG <span class="sub">@therealgregcoolidge</span></div><div class="gbar"><div class="gfill" style="width:60%;background:var(--accent)"></div></div><div class="gnum">899 / 1,500</div></div>
+      <div class="goal"><div class="gname">Business IG <span class="sub">@thecoolidgegroup</span></div><div class="gbar"><div class="gfill" style="width:43%;background:var(--accent)"></div></div><div class="gnum">217 / 500</div></div>
+      <div class="goal"><div class="gname">Business FB Page <span class="sub">KW Advisors</span></div><div class="gbar"><div class="gfill" style="width:38%;background:var(--accent)"></div></div><div class="gnum">113 / 300</div></div>
+
+      <div class="mon-next" style="margin-top:14px">🧭 <b>The focus call:</b> Your personal brand is the growth engine — personal FB (4.1k) alone dwarfs both business accounts combined. Make <b>personal Facebook Priority #1</b> (it's ~900 followers from unlocking monetization), keep personal IG as the #2 growth play, and run the business accounts on a lighter, consistent cadence <em>fed by cross-promotion</em> rather than trying to grow them cold.</div>
+    </div>
+
+    <div class="mon-grid">
+      <div class="mon-card">
+        <div class="mh"><span class="who">This week's 3 moves</span><span class="prog" style="color:var(--accent)">● do these</span></div>
+        <div class="pgm">Highest-leverage actions, in order</div>
+        <div class="move"><span class="pr">🔴</span><div><b>Rework the giveaway CTA.</b><span class="why">Drop "comment the keyword + share to win." Swap to a genuine prompt ("What's your favorite spot in Oakley?") or "save this." Protects FB monetization eligibility <em>and</em> reach.</span></div></div>
+        <div class="move"><span class="pr">🟠</span><div><b>Batch-film 3 face-to-camera Reels</b> for personal FB + IG.<span class="why">Personal is your biggest audience; this closes the ~900-follower gap to 5k and reverses the ~41% FB view decline.</span></div></div>
+        <div class="move"><span class="pr">🔵</span><div><b>Optimize &amp; feed @thecoolidgegroup.</b><span class="why">Add a clear "Follow for [city] market updates" line + working link-in-bio, and post 2× this week. It's your most-neglected account (217).</span></div></div>
+      </div>
+
+      <div class="mon-card">
+        <div class="mh"><span class="who">Brand health</span><span class="prog" style="color:var(--warning)">● needs work</span></div>
+        <div class="pgm">The fundamentals the algorithm rewards</div>
+        <div class="crit"><span class="ci">⚠️</span><span class="cn"><b>Posting consistency</b><span class="sub">FB Page had 1 post/30d. Target: 3–4/wk personal, 2–3/wk business</span></span><span class="cv" style="color:var(--warning)">Low</span></div>
+        <div class="crit"><span class="ci">✅</span><span class="cn"><b>Personal profiles</b><span class="sub">Verified, clear bios, links — well set up</span></span><span class="cv" style="color:var(--good)">Strong</span></div>
+        <div class="crit"><span class="ci">⚠️</span><span class="cn"><b>Business IG profile</b><span class="sub">Needs a sharper CTA + clean link-in-bio</span></span><span class="cv" style="color:var(--warning)">Fix</span></div>
+        <div class="crit"><span class="ci">🎯</span><span class="cn"><b>Content-pillar balance</b><span class="sub">Aim for the mix below</span></span><span class="cv">See ↓</span></div>
+      </div>
+
+      <div class="mon-card">
+        <div class="mh"><span class="who">Personal → business funnel</span><span class="prog" style="color:var(--accent)">● strategy</span></div>
+        <div class="pgm">How the audience becomes leads</div>
+        <div style="font-size:13px;line-height:1.6;margin-top:4px">
+          <div><b>Reach engine:</b> Personal FB 4.1k + IG 899</div>
+          <div style="color:var(--muted);text-align:center;margin:2px 0">↓ cross-promote</div>
+          <div><b>Brand hub:</b> @thecoolidgegroup + Page</div>
+          <div style="color:var(--muted);text-align:center;margin:2px 0">↓ link-in-bio</div>
+          <div><b>Capture:</b> thecoolidgegroup.com → leads</div>
+        </div>
+        <div class="mon-next" style="margin-top:11px">👉 End personal posts with a soft "follow @thecoolidgegroup for local listings." You're sitting on the audience — route it.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Content pillar mix</h3>
+      <p class="cap">A balanced brand posts across pillars, not just listings. Target weighting for a local real-estate brand:</p>
+      <div class="barrow"><div>Local spotlights &amp; community</div><div class="track"><div class="fill" style="width:100%;background:var(--s1)"></div></div><div class="n">25%</div></div>
+      <div class="barrow"><div>Listings, tours &amp; wins</div><div class="track"><div class="fill" style="width:80%;background:var(--s5)"></div></div><div class="n">20%</div></div>
+      <div class="barrow"><div>Market education</div><div class="track"><div class="fill" style="width:80%;background:var(--s4)"></div></div><div class="n">20%</div></div>
+      <div class="barrow"><div>Personal / behind-the-scenes</div><div class="track"><div class="fill" style="width:80%;background:var(--s6)"></div></div><div class="n">20%</div></div>
+      <div class="barrow"><div>Social proof / testimonials</div><div class="track"><div class="fill" style="width:60%;background:var(--s3)"></div></div><div class="n">15%</div></div>
+      <p class="cap" style="margin-top:8px">Your Oak Tavern spotlight series = pillar 1. "Things nobody tells you" = pillar 3. You're strong on 1 &amp; 3 — build out 2, 4, and 5.</p>
+    </div>
+  </section>
+
   <!-- KPIs -->
+  <div class="preview-note">
+    <span style="font-size:15px">👁️</span>
+    <span><b style="color:var(--text-primary)">Preview below.</b> The charts and reach/engagement tiles in each tab show illustrative sample data to demonstrate the format. Your real per-account data begins at the ~Jul 31 pull; today's real numbers live in the Baseline Snapshot &amp; Strategy Room above. Follower tiles show your real Jul 17 baseline.</span>
+  </div>
   <div class="grid kpis" id="kpiRow"></div>
 
   <!-- Growth + Heatmap -->
@@ -347,7 +434,7 @@
 const DATA = {
   ig: {
     kpis:[
-      {label:"Followers",       val:4820,  delta:+3.4, fmt:"n",  spark:[4520,4560,4585,4610,4655,4690,4712,4740,4768,4790,4805,4820], foot:"+158 net this period"},
+      {label:"Followers",       val:217,   delta:0,    fmt:"n",  spark:[210,211,212,213,213,214,215,215,216,216,217,217], foot:"Real · Jul 17 baseline"},
       {label:"Accounts reached",val:38400, delta:+21.7,fmt:"n",  spark:[24,26,25,29,31,30,33,35,34,37,36,38.4], foot:"Reels driving 74% of reach"},
       {label:"Engagement rate", val:5.9,   delta:+0.8, fmt:"pct",spark:[4.6,4.8,4.9,4.7,5.1,5.3,5.2,5.5,5.4,5.7,5.8,5.9], foot:"Saves + shares up sharply"},
       {label:"Profile→link taps",val:412,  delta:-6.2, fmt:"n",  spark:[48,44,46,41,39,42,38,37,36,35,34,33], foot:"Watch — trending down"},
@@ -389,7 +476,7 @@ const DATA = {
   },
   igp: {
     kpis:[
-      {label:"Followers",       val:1980,  delta:+5.1, fmt:"n",  spark:[1740,1770,1795,1820,1848,1870,1890,1912,1935,1955,1968,1980], foot:"Personal brand growing faster %"},
+      {label:"Followers",       val:899,   delta:0,    fmt:"n",  spark:[890,891,892,893,894,895,896,897,898,898,899,899], foot:"Real · Jul 17 baseline"},
       {label:"Accounts reached",val:14200, delta:+28.4,fmt:"n",  spark:[8,9,8.5,10,11,10.5,12,11.6,12.8,13,13.6,14.2], foot:"Face-to-camera Reels travel"},
       {label:"Engagement rate", val:8.7,   delta:+1.4, fmt:"pct",spark:[6.8,7.0,7.2,7.1,7.5,7.8,7.6,8.0,8.2,8.4,8.5,8.7], foot:"Higher than the business page"},
       {label:"Profile→link taps",val:186,  delta:+9.8, fmt:"n",  spark:[14,15,16,15,17,18,17,19,20,21,22,23], foot:"Warm audience, small but active"},
@@ -430,7 +517,7 @@ const DATA = {
   },
   fb: {
     kpis:[
-      {label:"Page followers",   val:2140, delta:+1.9, fmt:"n",  spark:[2050,2062,2071,2080,2088,2095,2102,2110,2118,2125,2132,2140], foot:"+41 net this period"},
+      {label:"Page followers",   val:113,  delta:0,    fmt:"n",  spark:[108,109,110,110,111,111,112,112,112,113,113,113], foot:"Real · Jul 17 baseline"},
       {label:"Post reach",       val:15600,delta:+9.3, fmt:"n",  spark:[10,11,10.5,12,11.5,13,12.4,13.8,13,14.5,15,15.6], foot:"Shares to local groups help"},
       {label:"Engagement rate",  val:3.8,  delta:+0.3, fmt:"pct",spark:[3.2,3.3,3.5,3.4,3.6,3.5,3.7,3.6,3.7,3.8,3.7,3.8], foot:"Steady, below IG"},
       {label:"Link clicks",      val:640,  delta:+12.5,fmt:"n",  spark:[42,45,48,50,52,55,57,58,60,62,63,64], foot:"FB audience clicks more"},
