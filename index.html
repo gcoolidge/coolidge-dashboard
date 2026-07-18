@@ -167,6 +167,28 @@
   .preview-note{display:flex;align-items:center;gap:9px;background:var(--card);border:1px dashed var(--baseline);border-radius:10px;padding:9px 13px;margin-bottom:12px;font-size:12.8px;color:var(--text-secondary)}
   @media(max-width:900px){.goal{grid-template-columns:118px 1fr 82px}}
 
+  /* ask assistant */
+  .askfab{position:fixed;right:20px;bottom:20px;z-index:60;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:13px 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(11,11,11,.18);display:flex;align-items:center;gap:8px}
+  .askfab:hover{filter:brightness(1.06)}
+  .askpanel{position:fixed;right:20px;bottom:78px;z-index:61;width:384px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 120px);background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 14px 44px rgba(11,11,11,.24);display:none;flex-direction:column;overflow:hidden}
+  .askpanel.open{display:flex}
+  .askhead{padding:13px 15px;border-bottom:1px solid var(--grid);display:flex;align-items:center;justify-content:space-between}
+  .askhead b{font-size:14.5px}
+  .askhead .sub{color:var(--muted);font-size:11px;margin-top:1px}
+  .askclose{background:none;border:none;font-size:20px;line-height:1;color:var(--muted);cursor:pointer}
+  .askbody{flex:1;overflow-y:auto;padding:13px 14px;display:flex;flex-direction:column;gap:10px}
+  .askmsg{max-width:90%;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:12px}
+  .askmsg.u{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+  .askmsg.a{align-self:flex-start;background:var(--surface-1);border:1px solid var(--border);border-bottom-left-radius:4px}
+  .askmsg.a b{font-weight:700}
+  .askchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+  .askchip{font-size:11.5px;border:1px solid var(--border);background:var(--card);color:var(--text-secondary);border-radius:999px;padding:5px 10px;cursor:pointer;text-align:left}
+  .askchip:hover{border-color:var(--accent);color:var(--accent)}
+  .askinput{display:flex;gap:8px;padding:11px 12px;border-top:1px solid var(--grid)}
+  .askinput input{flex:1;font:inherit;font-size:13px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface-1);color:var(--text-primary)}
+  .askinput button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:0 15px;font-weight:700;cursor:pointer}
+  @media(max-width:560px){.askfab span.lbl{display:none}}
+
   .tt{position:fixed;pointer-events:none;background:var(--text-primary);color:var(--page);
     font-size:12px;padding:6px 9px;border-radius:7px;opacity:0;transform:translateY(4px);
     transition:opacity .12s;z-index:50;white-space:nowrap;font-weight:600;}
@@ -466,6 +488,16 @@
     Built for The Coolidge Group · Numbers shown are illustrative sample data until a source is connected.<br>
     Best-time-to-post and content signals recalculate automatically once real metrics are flowing.
   </footer>
+</div>
+<button class="askfab" id="askFab">💬 <span class="lbl">Ask the dashboard</span></button>
+<div class="askpanel" id="askPanel">
+  <div class="askhead">
+    <div><b>Ask the dashboard</b><div class="sub">Answers from your data &amp; strategy · private, on-device</div></div>
+    <button class="askclose" id="askClose" aria-label="Close">×</button>
+  </div>
+  <div class="askbody" id="askBody"></div>
+  <div class="askchips" id="askChips"></div>
+  <div class="askinput"><input id="askInput" type="text" placeholder="Ask about your numbers, goals, timing…" autocomplete="off"><button id="askSend">Send</button></div>
 </div>
 <div class="tt" id="tt"></div>
 
@@ -863,6 +895,59 @@ $("#themeBtn").addEventListener("click",()=>{
 if(matchMedia("(prefers-color-scheme:dark)").matches) document.documentElement.setAttribute("data-theme","dark");
 
 renderStatic(); renderMonetization(); renderAll();
+
+/* ============================================================
+   ASK THE DASHBOARD — self-contained Q&A over your data/strategy.
+   No external calls; answers from the knowledge base below.
+   ============================================================ */
+(function(){
+  const KB=[
+    {k:["how many follow","current follow","my number","baseline number","total follow","followers do i","follower count"],a:"<b>Your Jul 17 baseline:</b><br>• Personal FB — <b>4,100</b><br>• Personal IG (@therealgregcoolidge) — <b>899</b><br>• Business IG (@thecoolidgegroup) — <b>217</b><br>• Business FB Page — <b>113</b><br>Personal Facebook is your biggest audience by far."},
+    {k:["focus","which account","priority","where should i","most important account","concentrate"],a:"<b>Focus on your personal Facebook.</b> At 4,100 it's your largest audience and only ~900 from the 5k monetization gate. Personal IG is #2; run the business accounts on a lighter, consistent cadence <b>fed by cross-promotion</b> rather than grown cold."},
+    {k:["monetiz","5k","5000","5,000","gate","creator income","get paid","earn"],a:"You're pursuing <b>Facebook Content Monetization</b>. Your personal FB (4,100) is <b>~900 followers</b> from the 5,000 gate — your best shot. Close it with steady Reels, reverse the view decline, and drop engagement-bait wording. It's batch-reviewed by Meta; there's no paid shortcut."},
+    {k:["best time","when should i post","when to post","timing","what time","posting time"],a:"Your strongest window is <b>Wednesday–Thursday, ~6:00–7:30pm</b>, with Friday late-morning as backup. Post giveaways Thursday evening to ride into the weekend. (This refreshes with your real data on ~Jul 31.)"},
+    {k:["what should i post","content idea","what to post","pillar","topics","post about","ideas"],a:"Rotate 5 pillars: <b>Local spotlights/community (25%)</b>, Listings/tours/wins (20%), Market education (20%), Personal/behind-the-scenes (20%), Social proof/testimonials (15%). This week's moves: rework the giveaway CTA, batch-film 3 face-to-camera Reels, optimize @thecoolidgegroup. Your Monday Content Kit has ready-to-film scripts."},
+    {k:["working","what's working","whats working","best performing","perform"],a:"<b>Reels drive the most reach</b> (face-to-camera especially), and <b>saves + shares</b> are your strongest signals. Retire plain listing photos — near-zero reach. Lean into education, local, and personal-story content."},
+    {k:["how often","cadence","frequency","how many times","post per week"],a:"Target cadence: <b>3–4 posts/week on personal, 2–3/week on business.</b> Consistency beats bursts — batch-film once, schedule the rest."},
+    {k:["goal","target","90 day","90-day","objective"],a:"<b>90-day goals:</b> Personal FB 4,100→5,000 · Personal IG 899→1,500 · Business IG 217→500 · Business FB Page 113→300. The real prize: <b>1–3 quality inbound leads/month by month 3</b>, plus a warmer sphere driving referrals."},
+    {k:["lead","inbound","get client","how do leads","conversion","funnel"],a:"Your lead paths are the <b>website link-in-bio</b> (home valuation/search) and <b>DMs</b> — every post should point to one. Realistic 90-day target: 1–3 quality inbound leads/month by month 3, ramping. Paid ads can accelerate later."},
+    {k:["positioning","brand","different","edge","stand out","unique"],a:"Your positioning is <b>\"the trusted local expert\"</b> — relationship &amp; trust + hyper-local knowledge across Cincinnati / NKY / SE Indiana. Lead with the human, community angle."},
+    {k:["engagement rate","what is engagement"],a:"<b>Engagement rate</b> = interactions (likes, comments, saves, shares) ÷ reach or followers, as a %. Saves and shares matter most to the algorithm now — design posts to be saved or genuinely shared."},
+    {k:["what is reach","define reach","reach mean"],a:"<b>Reach</b> = the number of unique accounts that saw your content. It's driven by early engagement velocity, so posting when your people are online (Wed–Thu eve) lifts reach."},
+    {k:["save","share"],a:"<b>Saves and shares are the #1 distribution signals in 2026</b> — more powerful than likes. Make content worth saving (checklists, local guides) or sharing (giveaways, relatable moments)."},
+    {k:["algorithm","ranking","how does the algo","get seen","reach more"],a:"Rough ranking power for a small account: <b>Shares/Sends &gt; Saves &gt; Watch-time &gt; Comments &gt; Likes.</b> Reach follows engagement in the first 30–60 min. Hook in the first 3 seconds, post at your peak window, and avoid engagement bait."},
+    {k:["giveaway","contest","comment to win","share to win"],a:"Keep running giveaways — but drop <b>\"comment the keyword + share to win\"</b> (engagement bait that hurts reach and monetization). Use: <b>follow + a genuine-question comment</b>, optional real tag. Your Content Kit has safe caption templates."},
+    {k:["next pull","data update","refresh","real data","july 31","jul 31","metricool","when will data"],a:"Data comes from <b>Metricool</b> (connected Jul 17). It only collects from connect day, so charts fill in over ~2 weeks. The <b>next full pull is ~July 31</b> — real per-account trends and best-times replace the sample previews then."},
+    {k:["sample","preview","illustrative","fake","not real","placeholder"],a:"The tab <b>charts + reach/engagement tiles are illustrative previews</b> of the format until Metricool has history (~Jul 31). Your <b>real</b> numbers are the follower tiles plus the Baseline Snapshot &amp; Strategy Room at the top."},
+    {k:["passcode","password","access","who can see","secure","privacy"],a:"The site is passcode-protected (client-side — good for keeping casual visitors out). To change the passcode, ask Claude in Cowork and it'll regenerate + republish the page."},
+    {k:["personal facebook","personal fb","greg coolidge profile","professional mode"],a:"Your <b>personal Facebook</b> (Greg Coolidge, Professional Mode) has 4,100 followers — biggest audience, closest to the 5k gate. Metricool can't auto-track personal FB profiles, so it's a manual-update tab."},
+    {k:["update","edit","change the dashboard","add","refresh the dashboard"],a:"To change the data or anything on the dashboard, ask <b>Claude in Cowork</b> — it regenerates the file and republishes to your GitHub Pages site. A fresh Content Kit also auto-generates every Monday, and the data refresh is queued for ~July 31."},
+    {k:["youtube"],a:"YouTube isn't connected yet — the tab is reserved. When you're ready, connect it in Metricool and ask Claude to switch on the YouTube tab."},
+    {k:["help","what can you","what can i ask","how do you work","what do you know"],a:"I can answer about your <b>current numbers, goals, best time to post, content strategy, monetization progress, and what the metrics mean</b>. Tap a starter below, or type a question. For anything more open-ended, ask Claude in Cowork."}
+  ];
+  const FALLBACK="I can answer about your <b>numbers, goals, best time to post, content strategy, monetization progress,</b> and what the metrics mean. Try one of the starters below — or for anything more open-ended, ask <b>Claude in Cowork</b> (that's where the dashboard gets updated).";
+  const STARTERS=["Which account should I focus on?","When should I post?","How close am I to monetization?","What should I post this week?","What are my current followers?","What's working right now?"];
+
+  const fab=document.getElementById("askFab"),panel=document.getElementById("askPanel"),
+        body=document.getElementById("askBody"),chips=document.getElementById("askChips"),
+        input=document.getElementById("askInput"),send=document.getElementById("askSend"),
+        close=document.getElementById("askClose");
+  let greeted=false;
+  function esc(t){return t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+  function msg(role,html){const d=document.createElement("div");d.className="askmsg "+role;d.innerHTML=html;body.appendChild(d);body.scrollTop=body.scrollHeight;}
+  function respond(q){
+    const s=q.toLowerCase();let best=null,score=0;
+    for(const e of KB){let sc=0;for(const k of e.k){if(s.includes(k))sc+=k.length>5?3:1;}if(sc>score){score=sc;best=e;}}
+    return score>0?best.a:FALLBACK;
+  }
+  function ask(q){q=q.trim();if(!q)return;msg("u",esc(q));setTimeout(()=>msg("a",respond(q)),140);input.value="";}
+  function renderChips(){chips.innerHTML="";STARTERS.forEach(s=>{const b=document.createElement("button");b.className="askchip";b.textContent=s;b.onclick=()=>ask(s);chips.appendChild(b);});}
+  function open(){panel.classList.add("open");if(!greeted){greeted=true;msg("a","Hi Greg 👋 Ask me anything about your dashboard — your numbers, goals, timing, or strategy. Here are some starters:");renderChips();}input.focus();}
+  fab.onclick=()=>panel.classList.contains("open")?panel.classList.remove("open"):open();
+  close.onclick=()=>panel.classList.remove("open");
+  send.onclick=()=>ask(input.value);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")ask(input.value);});
+})();
 </script>
 </body>
 </html>
